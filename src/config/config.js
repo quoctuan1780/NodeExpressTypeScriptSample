@@ -1,14 +1,39 @@
+// module.exports = {
+//     "development": {
+//         "dialect": "sqlite",
+//         "storage": "../database/batterythuduc.sqlite3"
+//     },
+//     "test": {
+//         "dialect": "sqlite",
+//         "storage": "../database/batterythuduc.sqlite3"
+//     },
+//     "production": {
+//         "dialect": "sqlite",
+//         "storage": "../database/batterythuduc.sqlite3"
+//     }
+// }
+
 module.exports = {
     "development": {
-        "dialect": "sqlite",
-        "storage": "../database/batterythuduc.sqlite3"
+        "username": "BatteryAdmin",
+        "password": "@Battery1780",
+        "dialect": "mysql",
+        "host": "127.0.0.1",
+        "database": "NodeJsSequelizeSample"
     },
     "test": {
-        "dialect": "sqlite",
-        "storage": "../database/batterythuduc.sqlite3"
+        "username": "BatteryAdmin",
+        "password": "@Battery1780",
+        "dialect": "mysql",
+        "host": "127.0.0.1",
+        "database": "NodeJsSequelizeSample"
     },
     "production": {
-        "dialect": "sqlite",
-        "storage": "../database/batterythuduc.sqlite3"
+        "username": "BatteryAdmin",
+        "password": "@Battery1780",
+        "dialect": "mysql",
+        "host": "127.0.0.1",
+        "database": "NodeJsSequelizeSample"
     }
 }
+

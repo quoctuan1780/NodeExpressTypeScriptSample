@@ -13,6 +13,10 @@ const app = express();
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
+const options = {
+  type: 'application/octet-stream',
+};
+app.use(bodyParser.raw(options));
 // parse application/json
 app.use(bodyParser.json())
 app.use(bodyParser.raw())
@@ -33,8 +37,8 @@ app.use(function(req: Request, res: Response, next: any) {
 
 app.use(function(req: Request, res: Response, next: any) {
   res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.header('Access-Control-Allow-Methods', 'POST, PUT, PATCH, GET, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Origin, Content-Type, Accept, Authorization, ');
   next();
 });
 

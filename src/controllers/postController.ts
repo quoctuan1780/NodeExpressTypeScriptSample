@@ -6,13 +6,13 @@ import {CreatePost, GetPost, GetPostById} from '../services/postService';
 
 const createPost = async (req: any, res: Response) => {
     try {
-        const file = req.files.image;
+        const file = req.file;
         var host = req.get('host');
         var protocol = req.protocol;
-        var fileBuffer = fs.readFileSync(file.path);
+        //var fileBuffer = fs.readFileSync(file.path);
         const fileName = v4();
-        const extension = path.extname(file.name);
-        fs.writeFileSync(`${__dirname}/../../public/images/${fileName}${extension}`, fileBuffer);  
+        const extension = path.extname(file.originalname);
+        fs.writeFileSync(`${__dirname}/../../public/images/${fileName}${extension}`, file.buffer);  
         delete req.files;
 
         req.body.imageUrl = `${protocol}://${host}/images/${fileName}${extension}`;

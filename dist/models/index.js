@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.SequelizeInstance = exports.DbInstance = void 0;
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
 const process_1 = __importDefault(require("process"));
@@ -11,12 +12,13 @@ const basename = path_1.default.basename(__filename);
 const env = process_1.default.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.js')[env];
 const db = {};
+exports.DbInstance = db;
 let sequelize;
 if (config.use_env_variable) {
-    sequelize = new Sequelize(process_1.default.env[config.use_env_variable], config);
+    exports.SequelizeInstance = sequelize = new Sequelize(process_1.default.env[config.use_env_variable], config);
 }
 else {
-    sequelize = new Sequelize(config.database, config.username, config.password, config);
+    exports.SequelizeInstance = sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
 fs_1.default
     .readdirSync(__dirname)
@@ -37,4 +39,3 @@ Object.keys(db).forEach(modelName => {
 });
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
-exports.default = db;

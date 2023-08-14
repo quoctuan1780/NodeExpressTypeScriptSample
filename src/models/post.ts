@@ -1,5 +1,5 @@
 import {Model, DataTypes} from 'sequelize';
-import db from './index';
+import {SequelizeInstance} from './index';
 
 interface PostAttributes {
   title: string,
@@ -24,9 +24,9 @@ export default class Post extends Model<PostAttributes> implements PostAttribute
   }
   Post.init({
     title: DataTypes.STRING,
-    content: DataTypes.STRING,
+    content: DataTypes.TEXT,
     imageUrl: DataTypes.STRING
   }, {
-    sequelize: db.sequelize,
+    sequelize: SequelizeInstance,
     modelName: 'Post',
   });

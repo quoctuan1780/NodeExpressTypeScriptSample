@@ -13,27 +13,30 @@
 //     }
 // }
 
+const dotenv = require('dotenv');
+
+dotenv.config();
+
 module.exports = {
     "development": {
-        "username": "BatteryAdmin",
-        "password": "@Battery1780",
+        "username": process.env.DB_USER_NAME,
+        "password": process.env.DB_PASSWORD,
         "dialect": "mysql",
-        "host": "127.0.0.1",
-        "database": "NodeJsSequelizeSample"
+        "host": process.env.DB_HOST,
+        "database": process.env.DB_DATABASE_NAME
     },
     "test": {
-        "username": "BatteryAdmin",
-        "password": "@Battery1780",
+        "username": process.env.DB_USER_NAME,
+        "password": process.env.DB_PASSWORD,
         "dialect": "mysql",
-        "host": "127.0.0.1",
-        "database": "NodeJsSequelizeSample"
+        "host": process.env.DB_HOST,
+        "database": process.env.DB_DATABASE_NAME
     },
     "production": {
-        "username": "BatteryAdmin",
-        "password": "@Battery1780",
+        "username": process.env.DB_USER_NAME,
+        "password": process.env.DB_PASSWORD,
         "dialect": "mysql",
-        "host": "127.0.0.1",
-        "database": "NodeJsSequelizeSample"
+        "host": process.env.DB_HOST,
+        "database": process.env.DB_DATABASE_NAME
     }
 }
-

@@ -6,10 +6,15 @@ import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import logger from 'morgan';
 import cors from 'cors';
+import dotenv from 'dotenv';
 import {PostRouter} from './routes/index';
 var debug = require('debug')('nodesample:server');
 
 const app = express();
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -27,22 +32,26 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+const corsConfig = cors({origin: '*'});
+
+app.use(corsConfig);
+
+app.options('*', corsConfig);
+app.get('*', corsConfig);
+app.post('*', corsConfig);
+app.put('*', corsConfig);
+app.patch('*', corsConfig);
+app.delete('*', corsConfig);
+
 app.use('/images', express.static(path.join(__dirname, '/../public/images')));
 app.use('/', PostRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req: Request, res: Response, next: any) {
-  next(createError(404));
-});
-
-app.use(function(req: Request, res: Response, next: any) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'POST, PUT, PATCH, GET, DELETE, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Origin, Content-Type, Accept, Authorization, ');
+  res.status(404).json({message: "Not found"})
   next();
 });
 
-app.use(cors());
 // error handler
 app.use(function(err: any, req: Request, res: Response, next: any) {
   // set locals, only providing error in development
@@ -54,7 +63,9 @@ app.use(function(err: any, req: Request, res: Response, next: any) {
   res.render('error');
 });
 
-const port = 3000
+dotenv.config();
+
+const port = process.env.PORT || 3001
 var server = createServer(app);
 
 /**
